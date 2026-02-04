@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 /* ── Stars ── */
@@ -35,7 +35,11 @@ const ORBIT_CSS = `
 `;
 
 const ParticleBackground: React.FC = () => {
-  const stars = useMemo(() => generateStars(150), []);
+  // Generate stars client-side only to avoid SSR hydration mismatch (Math.random)
+  const [stars, setStars] = useState<Star[]>([]);
+  useEffect(() => {
+    setStars(generateStars(150));
+  }, []);
 
   return (
     <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
