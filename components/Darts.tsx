@@ -13,7 +13,11 @@ import DartsMultiplierLegend from "@/components/darts/DartsMultiplierLegend";
 import DartsResultHistory from "@/components/darts/DartsResultHistory";
 import DartsSetupCard from "@/components/darts/DartsSetupCard";
 import DartThrowAnimation from "@/components/darts/DartThrowAnimation";
-import ParticleBackground from "@/components/darts/ParticleBackground";
+import dynamic from "next/dynamic";
+const ParticleBackground = dynamic(
+  () => import("@/components/darts/ParticleBackground"),
+  { ssr: false }
+);
 
 interface DartsProps {
   game: Game;
